@@ -1,0 +1,23 @@
+version: '3.3'
+services:
+
+  kms:
+    image: jmx-tomcat
+    container_name: jmx-tomcat
+    environment:
+      - "JAVA_OPTS=-Dcom.sun.management.jmxremote
+        -Dcom.sun.management.jmxremote.local.only=false
+        -Dcom.sun.management.jmxremote.authenticate=false
+        -Dcom.sun.management.jmxremote.port=9999
+        -Dcom.sun.management.jmxremote.rmi.port=9999
+        -Djava.rmi.server.hostname=0.0.0.0
+        -Dcom.sun.management.jmxremote.ssl=false"
+    ports:
+      - '8080:8080'
+      - '9999:9999'
+    networks:
+      - jmx
+    restart: always
+
+networks:
+  jmx:
